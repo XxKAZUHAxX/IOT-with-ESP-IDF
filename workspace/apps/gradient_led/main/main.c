@@ -58,7 +58,7 @@ static void hsv_to_rgb(float h, float s, float v,
 
 /* ── Main task ───────────────────────────────────────────── */
 
-static void rgb_gradient_task(void *arg)
+static void LightingTask(void *arg)
 {
     /* Configure the LED strip */
     led_strip_config_t strip_cfg = {
@@ -125,17 +125,19 @@ static void LogTask(void *arg)
 
 void app_main(void)
 {
-    xTaskCreate(rgb_gradient_task,
+    xTaskCreatePinnedToCore(LightingTask,
                 "rgb_gradient",
                 4096,
                 NULL,
                 5,
-                NULL);
+                NULL,
+                0);
 
-    xTaskCreate(LogTask,
+    xTaskCreatePinnedToCore(LogTask,
                 "log_task",
                 2048,
                 NULL,
                 5,
-                NULL);
+                NULL,
+                1);
 }

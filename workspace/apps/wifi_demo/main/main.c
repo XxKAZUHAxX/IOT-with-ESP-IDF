@@ -29,8 +29,8 @@ void app_main(void)
     esp_ret = nvs_flash_init();
     if (esp_ret == ESP_ERR_NVS_NO_FREE_PAGES || 
         esp_ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-      ESP_ERROR_CHECK(nvs_flash_erase());
-      esp_ret = nvs_flash_init();
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        esp_ret = nvs_flash_init();
     }
     if (esp_ret != ESP_OK) {
         ESP_LOGE(TAG, "Error (%d): Failed to initialize NVS", esp_ret);
